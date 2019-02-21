@@ -22,14 +22,15 @@ app.post('/add', urlencodedParser, function (req, res) {
     });
     job.on('succeeded', function (result) {
         console.log('completed job ' + job.id);
-        res.send('output: ' + result);
+        //res.send('output: ' + result);
+        res.sendStatus(200)
     });
     job.save(function (err, job) {
         if (err) {
-          console.log('job failed to save');
+          //console.log('job failed to save');
           return res.send('job failed to save');
         }
-        console.log('saved job ' + job.id);
+        //console.log('saved job ' + job.id);
       });
     });
     app.post('/incr', urlencodedParser, function(req,res){
@@ -39,15 +40,15 @@ app.post('/add', urlencodedParser, function (req, res) {
             x: 1
         });
         job.on('succeeded', function (result) {
-            console.log('completed job ' + job.id);
-            res.send('output: ' + result);
+            //console.log('completed job ' + job.id);
+            res.send('value: ' + result);
         });
         job.save(function (err, job) {
             if (err) {
-              console.log('job failed to save');
+              //console.log('job failed to save');
               return res.send('job failed to save');
             }
-            console.log('saved job ' + job.id);
+            //console.log('saved job ' + job.id);
           });
 
     });

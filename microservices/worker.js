@@ -12,7 +12,7 @@ queue.on('ready', function () {
     console.log('processing job ' + job.id);
     setTimeout(function () {
     if(job.data.x==0){
-        client.get('framework', function(err, reply) {
+        client.get(job.data.id, function(err, reply) {
             console.log(reply);
             if(reply==null){
                 done(null);
@@ -21,7 +21,12 @@ queue.on('ready', function () {
         });
         }
     else{
-        done(null, client.incr(job.data.id));
+        client.incr(job.data.id)
+        client.get(job.data.id, function(err, reply) {
+          console.log(reply);
+          done(null, reply);
+      });
+        
       }
     }, 10);
   });

@@ -12,7 +12,8 @@ function jwt() {
             '/users/authenticate',
             '/users/register',
             '/thread/create',
-            '/thread/post'
+            '/thread/post',
+            '/thread/get'
         ]
     });
 }

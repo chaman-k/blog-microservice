@@ -3,7 +3,9 @@ const Thread = require('./thread.model');
 
 module.exports = {
     createThread,
-    createPost
+    createPost,
+    get,
+    getAll
 };
 
 async function createThread (title, post) {
@@ -33,5 +35,25 @@ async function createPost (threadId, post) {
         .catch(error => {
             console.log(error);            
         })
+    })
+}
+
+async function getAll() {
+    return await Thread.find({})
+    .then(thread => {
+        return thread;
+    })
+    .catch(error => {
+        return error;            
+    })
+}
+
+async function get (threadId) {
+    return await Thread.findById(threadId)
+    .then(thread => {
+        return thread;
+    })
+    .catch(error => {
+        return error;            
     })
 }

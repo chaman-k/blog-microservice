@@ -4,7 +4,7 @@ const threadService = require('./thread.service');
 
 router.post('/create', createThread);
 router.post('/post', createPost);
-
+router.get('/get', get);
 
 function createThread(req, res, next) {    
     if(req.body.title && req.body.post) {
@@ -25,6 +25,18 @@ function createPost(req, res, next) {
         .catch(err => next(err))
     } else {
         res.sendStatus(400);
+    }
+}
+
+function get (req, res, next) {
+    if(req.body.threadId) {
+        threadService.get(req.body.threadId)
+        .then(thread => { res.json(thread)})
+        .catch(err => next(err))
+    } else {
+        threadService.getAll()
+        .then(thread => { res.json(thread)})
+        .catch(err => next(err))
     }
 }
 

@@ -50,7 +50,6 @@ app.post('/add', urlencodedParser, function (req, res) {
             }
             //console.log('saved job ' + job.id);
           });
-
     });
     
 app.listen(5000);

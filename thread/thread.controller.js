@@ -6,7 +6,6 @@ router.post('/create', createThread);
 router.post('/post', createPost);
 
 
-
 function createThread(req, res, next) {    
     if(req.body.title && req.body.post) {
         threadService.createThread(req.body.title, req.body.post)

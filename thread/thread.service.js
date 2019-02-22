@@ -1,3 +1,4 @@
+const axios = require('axios');
 const Thread = require('./thread.model');
 
 module.exports = {
@@ -10,9 +11,27 @@ async function createThread (title, post) {
         title: title,
         post: post
     });
-    return await thread.save().then(res => {return res._id;});
+    return await thread.save().then(res => {
+        axios.post('http://127.0.0.1:5000/add', {
+            name: res._id
+        }).then(resp => {
+            console.log(resp.data);
+        })
+        .catch(error => {
+            console.log(error);            
+        })
+        return res._id;});
 }
 
 async function createPost (threadId, post) {
-    await Thread.findOneAndUpdate(threadId, {$push: {post: post}})
+    await Thread.findOneAndUpdate(threadId, {$push: {post: post}}).then(success => {
+        axios.post('http://127.0.0.1:5000/incr', {
+            name: threadId
+        }).then(resp => {
+            console.log(resp.data);
+        })
+        .catch(error => {
+            console.log(error);            
+        })
+    })
 }

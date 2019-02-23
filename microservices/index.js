@@ -41,7 +41,7 @@ app.post('/add', urlencodedParser, function (req, res) {
         });
         job.on('succeeded', function (result) {
             //console.log('completed job ' + job.id);
-            res.send('value: ' + result);
+            res.json({value: result});
         });
         job.save(function (err, job) {
             if (err) {

@@ -30,7 +30,7 @@ async function createPost (threadId, post) {
         return axios.post('http://127.0.0.1:5000/incr', {
             name: threadId
         }).then(resp => {
-            return resp.data;
+            return resp.data.value;
         })
         .catch(error => {
             console.log(error);            

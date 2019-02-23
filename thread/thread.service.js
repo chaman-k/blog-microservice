@@ -26,11 +26,11 @@ async function createThread (title, post) {
 }
 
 async function createPost (threadId, post) {
-    await Thread.findOneAndUpdate(threadId, {$push: {post: post}}).then(success => {
-        axios.post('http://127.0.0.1:5000/incr', {
+    return await Thread.findOneAndUpdate(threadId, {$push: {post: post}}).then(success => {
+        return axios.post('http://127.0.0.1:5000/incr', {
             name: threadId
         }).then(resp => {
-            console.log(resp.data);
+            return resp.data;
         })
         .catch(error => {
             console.log(error);            

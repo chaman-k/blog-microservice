@@ -20,7 +20,8 @@ function createThread(req, res, next) {
 function createPost(req, res, next) {
     if(req.body.threadId && req.body.post) {
         threadService.createPost(req.body.threadId, req.body.post)
-        .then((success) => {res.json({success: true});
+        .then((value) => {            
+            res.json({value});
         })
         .catch(err => next(err))
     } else {
